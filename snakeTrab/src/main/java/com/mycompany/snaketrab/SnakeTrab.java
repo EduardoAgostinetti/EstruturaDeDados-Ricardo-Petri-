@@ -21,7 +21,7 @@ public class SnakeTrab {
         mapa(tabuleiro);
         snake(snake);
         posicionarCobra(vetorY, vetorX, tabuleiro, snake);
-        posicionarFruta(fruta, frutaX, frutaY,tabuleiro);
+        posicionarFruta(corpo, vetorX, vetorY, fruta, frutaX, frutaY,tabuleiro);
         andarCobra(snake, corpo, andar, fruta, frutaX, frutaY, tabuleiro, vetorY, vetorX);
         
     }
@@ -82,7 +82,7 @@ public class SnakeTrab {
         
     }
     
-    public static void posicionarFruta(String fruta, int [] frutaX, int [] frutaY, String [][] tabuleiro){
+    public static void posicionarFruta(int corpo, int [] vetorX, int [] vetorY, String fruta, int [] frutaX, int [] frutaY, String [][] tabuleiro){
         Scanner sc = new Scanner(System.in);
         System.out.println();
         System.out.println("Onde Você quer colocar a Fruta ?");
@@ -98,6 +98,21 @@ public class SnakeTrab {
             System.out.println("Por favor, as cordenadas é de 1 a 7, insira novamente as Cordenadas do Y: ");
             frutaY[0] = sc.nextInt();
         }
+        
+        
+            while(frutaX[0] == vetorX[0] && frutaY[0] == vetorY[0]){
+            System.out.println("Por favor, as cordenadas não podem ser igual a da cobra, insira novamente as Cordenadas da Fruta: ");
+            frutaX[0] = sc.nextInt();
+            frutaY[0] = sc.nextInt();
+        
+        }
+             while(tabuleiro[frutaX[0]][frutaY[0]].equals("Z")){
+            System.out.println("Por favor, as cordenadas não podem ser igual a da cobra, insira novamente as Cordenadas da Fruta: ");
+            frutaX[0] = sc.nextInt();
+            frutaY[0] = sc.nextInt();
+        
+        }
+        
         
         tabuleiro[frutaX[0]][frutaY[0]] = fruta;
         repassarMapa(tabuleiro);
@@ -211,7 +226,7 @@ public class SnakeTrab {
       
         
         
-        posicionarFruta(fruta, frutaX, frutaY,tabuleiro);
+        posicionarFruta(corpo, vetorX, vetorY, fruta, frutaX, frutaY,tabuleiro);
         andarCobra(snake, corpo, andar, fruta, frutaX, frutaY, tabuleiro, vetorY, vetorX);
     }
     
